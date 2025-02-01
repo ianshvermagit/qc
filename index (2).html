@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            color: whitesmoke;
+            background-image: url(image1.png);
+        }
+        select{
+            width: 90%;
+            padding: 10px;
+            margin-top: 40px ;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input{
+            width: 83%;
+            padding: 10px;
+            margin: 40px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+           
+        }
+        button {
+            width: 30%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color:rgb(243, 9, 243) ;
+        }
+        #qrcode {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <div style="background-color: rgb(243, 9, 243); height: 80px;"> <h2 style="color: black; padding-top: 25px;">QR Code Generator</h2></div>
+        <select id="option">
+            <option value="url">URL</option>
+            <option value="upi">UPI ID</option>
+        </select>
+        <input type="text" id="inputData" placeholder="Enter URL or UPI ID">
+        <button onclick="generateQR()">Generate QR Code</button>
+        <div id="qrcode"></div>
+    </div>
+
+    <script>
+        function generateQR() {
+            var inputData = document.getElementById("inputData").value;
+            var option = document.getElementById("option").value;
+            var qrDiv = document.getElementById("qrcode");
+            qrDiv.innerHTML = "";
+            
+            if (inputData.trim() === "") {
+                alert("Please enter a valid input.");
+                return;
+            }
+            
+            var qrValue = option === "upi" ? `upi://pay?pa=${inputData}` : inputData;
+            new QRCode(qrDiv, {
+                text: qrValue,
+                width: 200,
+                height: 200
+            });
+        }
+    </script>
+    <br><p>Developed by: @ansh_verma</p>
+</body>
+</html>
