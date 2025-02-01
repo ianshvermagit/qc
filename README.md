@@ -1,0 +1,2 @@
+# qc
+QR code genrator
